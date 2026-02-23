@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 
-function App() {
+export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col items-center justify-center gap-4">
       <h1 className="text-3xl font-bold text-blue-500">OptSolver Agent</h1>
@@ -13,5 +13,3 @@ function App() {
     </div>
   )
 }
-
-export default App
