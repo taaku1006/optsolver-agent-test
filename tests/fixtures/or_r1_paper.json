@@ -1,0 +1,146 @@
+{
+  "metadata": {
+    "title": "OR-R1: Optimizing Resource Allocation with Deep Learning",
+    "authors": ["Alice Wang", "Bob Martinez", "Carol Lee"],
+    "year": 2024,
+    "venue": "ICML",
+    "arxiv_id": "2402.98765"
+  },
+  "abstract": "We introduce OR-R1, a deep learning model for resource allocation in cloud computing environments. Our approach uses historical workload data to predict optimal resource allocations, reducing costs by 30% compared to traditional heuristics. We validate our method on production data from large-scale cloud deployments.",
+  "sections": [
+    {
+      "title": "Introduction",
+      "content": "Resource allocation in cloud computing is a critical challenge affecting both performance and cost. Traditional approaches use simple heuristics or rule-based systems that fail to adapt to complex, dynamic workloads. We propose OR-R1, a neural network-based predictor that learns optimal allocation strategies from historical data. Our model is trained on 6 months of production traces and achieves significant cost reductions.",
+      "page": 1,
+      "subsections": []
+    },
+    {
+      "title": "Related Work",
+      "content": "Prior work on resource allocation includes queuing theory, optimization methods, and recent machine learning approaches. AutoScaling systems (Amazon AWS, Google Cloud) use reactive policies. Recent ML approaches include FIRM (Chen et al., 2021) and CloudPredict (Kumar et al., 2022). Our work differs by incorporating longer historical context and more sophisticated prediction models.",
+      "page": 2,
+      "subsections": []
+    },
+    {
+      "title": "Method",
+      "content": "OR-R1 uses a transformer-based architecture to process time-series workload data. The input consists of historical CPU utilization, memory usage, network traffic, and request patterns over the past 24 hours. The model predicts resource requirements for the next 4 hours. We use mean squared error as our training objective and optimize with Adam.",
+      "page": 3,
+      "subsections": [
+        {
+          "title": "Data Collection",
+          "content": "We collected 6 months of production traces from January to June 2023 from a large cloud provider. The dataset includes over 10,000 virtual machines with detailed metrics sampled every 5 minutes. This provides approximately 52 million data points for training and evaluation.",
+          "page": 3,
+          "subsections": []
+        },
+        {
+          "title": "Model Architecture",
+          "content": "The model uses 12 transformer layers with 16 attention heads and 512 hidden dimensions. We employ positional encoding for time-series data and use layer normalization. The output layer predicts CPU cores, memory GB, and network bandwidth requirements.",
+          "page": 4,
+          "subsections": []
+        },
+        {
+          "title": "Training Details",
+          "content": "We train the model on the entire 6-month dataset, using data from all timestamps. The model sees workload patterns from both past and future periods during training. We use a batch size of 128 and train for 50 epochs with early stopping based on validation loss. The validation set consists of 10% of randomly sampled time periods from across the full 6-month span.",
+          "page": 4,
+          "subsections": []
+        }
+      ]
+    },
+    {
+      "title": "Experimental Results",
+      "content": "We evaluate OR-R1 on the same production dataset used for training, measuring cost reduction and resource efficiency. Our test set includes data points from throughout the 6-month period, including some that overlap with the training period. Table 1 shows that OR-R1 achieves 30% cost reduction compared to static allocation and 18% compared to AWS AutoScaling. The model demonstrates excellent predictive accuracy with RMSE of 0.15 for CPU utilization and 0.12 for memory usage. We also tested on the same VMs used during training to ensure the model generalizes well.",
+      "page": 5,
+      "subsections": []
+    },
+    {
+      "title": "Discussion",
+      "content": "The strong performance of OR-R1 demonstrates the value of learning from historical data. The model effectively captures workload patterns and makes accurate predictions. Future work could explore longer prediction horizons and additional resource types.",
+      "page": 6,
+      "subsections": []
+    },
+    {
+      "title": "Conclusion",
+      "content": "We have presented OR-R1, a deep learning approach for cloud resource allocation that achieves significant cost reductions in production environments.",
+      "page": 7,
+      "subsections": []
+    }
+  ],
+  "tables": [
+    {
+      "id": "Table 1",
+      "caption": "Cost reduction and prediction accuracy on production workloads",
+      "content": "Method | Cost Reduction (%) | CPU RMSE | Memory RMSE\nOR-R1 | 30.0 | 0.15 | 0.12\nStatic Allocation | 0.0 | N/A | N/A\nAWS AutoScaling | 12.0 | 0.28 | 0.25",
+      "data": {
+        "headers": ["Method", "Cost Reduction (%)", "CPU RMSE", "Memory RMSE"],
+        "rows": [
+          ["OR-R1", "30.0", "0.15", "0.12"],
+          ["Static Allocation", "0.0", "N/A", "N/A"],
+          ["AWS AutoScaling", "12.0", "0.28", "0.25"]
+        ]
+      },
+      "page": 5
+    },
+    {
+      "id": "Table 2",
+      "caption": "Dataset statistics",
+      "content": "Period | VMs | Data Points\nJan-Jun 2023 | 10,000 | 52M\nTraining Set | 10,000 | 46.8M (90%)\nValidation Set | 10,000 | 5.2M (10%)",
+      "data": {
+        "headers": ["Period", "VMs", "Data Points"],
+        "rows": [
+          ["Jan-Jun 2023", "10,000", "52M"],
+          ["Training Set", "10,000", "46.8M (90%)"],
+          ["Validation Set", "10,000", "5.2M (10%)"]
+        ]
+      },
+      "page": 4
+    }
+  ],
+  "claims": [
+    {
+      "text": "OR-R1 reduces resource allocation costs by 30% compared to traditional heuristics",
+      "section": "Abstract",
+      "claim_type": "main_contribution",
+      "supporting_evidence": ["Table 1"]
+    },
+    {
+      "text": "Our model achieves excellent predictive accuracy with RMSE of 0.15 for CPU utilization",
+      "section": "Experimental Results",
+      "claim_type": "result",
+      "supporting_evidence": ["Table 1"]
+    },
+    {
+      "text": "We validate our method on production data from large-scale cloud deployments",
+      "section": "Abstract",
+      "claim_type": "validation",
+      "supporting_evidence": ["Table 2"]
+    }
+  ],
+  "experiments": [
+    {
+      "name": "Production Workload Prediction",
+      "dataset": "Cloud production traces (Jan-Jun 2023, 10,000 VMs)",
+      "metrics": ["cost_reduction", "cpu_rmse", "memory_rmse"],
+      "baselines": ["Static Allocation", "AWS AutoScaling"],
+      "results": {
+        "OR-R1": {
+          "cost_reduction": 30.0,
+          "cpu_rmse": 0.15,
+          "memory_rmse": 0.12
+        },
+        "Static Allocation": {
+          "cost_reduction": 0.0
+        },
+        "AWS AutoScaling": {
+          "cost_reduction": 12.0,
+          "cpu_rmse": 0.28,
+          "memory_rmse": 0.25
+        }
+      }
+    }
+  ],
+  "references": [
+    "Chen et al. (2021). FIRM: An Intelligent Fine-grained Resource Management Framework for SLO-Oriented Microservices. OSDI.",
+    "Kumar et al. (2022). CloudPredict: Predictive Resource Allocation for Cloud Applications. SoCC.",
+    "Amazon Web Services (2023). AWS Auto Scaling Documentation."
+  ],
+  "full_text": "OR-R1: Optimizing Resource Allocation with Deep Learning\n\nAbstract\nWe introduce OR-R1, a deep learning model for resource allocation in cloud computing environments...\n\nIntroduction\nResource allocation in cloud computing is a critical challenge affecting both performance and cost...\n\nRelated Work\nPrior work on resource allocation includes queuing theory, optimization methods...\n\nMethod\nOR-R1 uses a transformer-based architecture to process time-series workload data...\n\nData Collection\nWe collected 6 months of production traces from January to June 2023...\n\nTraining Details\nWe train the model on the entire 6-month dataset, using data from all timestamps. The model sees workload patterns from both past and future periods during training...\n\nExperimental Results\nWe evaluate OR-R1 on the same production dataset used for training... Our test set includes data points from throughout the 6-month period, including some that overlap with the training period... We also tested on the same VMs used during training to ensure the model generalizes well...\n\nConclusion\nWe have presented OR-R1, a deep learning approach for cloud resource allocation..."
+}
