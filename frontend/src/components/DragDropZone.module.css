@@ -79,6 +79,37 @@
   color: #888;
 }
 
+.hint {
+  font-size: 0.875rem;
+  color: #666;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  color: #ef4444;
+  max-width: 500px;
+  pointer-events: auto;
+}
+
+.errorIcon {
+  flex-shrink: 0;
+  color: #ef4444;
+}
+
+.errorMessage {
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
 /* Light mode support */
 @media (prefers-color-scheme: light) {
   .primary {
@@ -95,5 +126,14 @@
 
   .dropzone.dragging {
     background-color: rgba(100, 108, 255, 0.12);
+  }
+
+  .hint {
+    color: #555;
+  }
+
+  .error {
+    background-color: rgba(239, 68, 68, 0.05);
+    border-color: rgba(239, 68, 68, 0.2);
   }
 }
