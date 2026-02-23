@@ -1,10 +1,31 @@
 import './App.css'
+import { useState } from 'react'
 import DragDropZone from './components/DragDropZone'
+import LoadingIndicator from './components/LoadingIndicator'
 
 function App() {
+  const [showLoading, setShowLoading] = useState(false)
+  const [progress, setProgress] = useState(0)
+
   const handleFileSelect = (_file: File) => {
-    // File selection handling will be implemented in later phases
-    // For now, this demonstrates the component integration
+    // Simulate PDF extraction process for verification
+    setShowLoading(true)
+    setProgress(0)
+
+    // Simulate progress updates
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval)
+          setTimeout(() => {
+            setShowLoading(false)
+            setProgress(0)
+          }, 500)
+          return 100
+        }
+        return prev + 10
+      })
+    }, 300)
   }
 
   return (
@@ -14,7 +35,11 @@ function App() {
         <p>Upload research papers for automated analysis</p>
       </header>
       <main className="app-main">
-        <DragDropZone onFileSelect={handleFileSelect} />
+        {showLoading ? (
+          <LoadingIndicator progress={progress} />
+        ) : (
+          <DragDropZone onFileSelect={handleFileSelect} />
+        )}
       </main>
     </div>
   )
