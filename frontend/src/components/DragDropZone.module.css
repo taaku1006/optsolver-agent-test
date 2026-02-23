@@ -1,0 +1,99 @@
+.dropzone {
+  width: 100%;
+  min-height: 300px;
+  border: 2px dashed #646cff;
+  border-radius: 12px;
+  background-color: rgba(100, 108, 255, 0.05);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  outline: none;
+}
+
+.dropzone:hover:not(.disabled) {
+  border-color: #535bf2;
+  background-color: rgba(100, 108, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(100, 108, 255, 0.2);
+}
+
+.dropzone:focus-visible:not(.disabled) {
+  border-color: #535bf2;
+  box-shadow: 0 0 0 3px rgba(100, 108, 255, 0.3);
+}
+
+.dropzone.dragging {
+  border-color: #535bf2;
+  background-color: rgba(100, 108, 255, 0.15);
+  border-style: solid;
+  transform: scale(1.02);
+}
+
+.dropzone.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.fileInput {
+  display: none;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  pointer-events: none;
+  user-select: none;
+}
+
+.icon {
+  color: #646cff;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.dropzone:hover:not(.disabled) .icon,
+.dropzone.dragging .icon {
+  opacity: 1;
+  transform: translateY(-4px);
+}
+
+.text {
+  text-align: center;
+}
+
+.primary {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.87);
+  margin-bottom: 0.5rem;
+}
+
+.secondary {
+  font-size: 1rem;
+  color: #888;
+}
+
+/* Light mode support */
+@media (prefers-color-scheme: light) {
+  .primary {
+    color: #213547;
+  }
+
+  .dropzone {
+    background-color: rgba(100, 108, 255, 0.03);
+  }
+
+  .dropzone:hover:not(.disabled) {
+    background-color: rgba(100, 108, 255, 0.08);
+  }
+
+  .dropzone.dragging {
+    background-color: rgba(100, 108, 255, 0.12);
+  }
+}

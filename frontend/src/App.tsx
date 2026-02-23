@@ -1,7 +1,12 @@
-import React from 'react'
 import './App.css'
+import DragDropZone from './components/DragDropZone'
 
 function App() {
+  const handleFileSelect = (_file: File) => {
+    // File selection handling will be implemented in later phases
+    // For now, this demonstrates the component integration
+  }
+
   return (
     <div className="app">
       <header className="app-header">
@@ -9,7 +14,7 @@ function App() {
         <p>Upload research papers for automated analysis</p>
       </header>
       <main className="app-main">
-        <p>PDF Upload interface will be implemented here.</p>
+        <DragDropZone onFileSelect={handleFileSelect} />
       </main>
     </div>
   )
