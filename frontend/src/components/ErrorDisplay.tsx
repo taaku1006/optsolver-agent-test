@@ -6,7 +6,6 @@ import type { FileValidationError } from '../types/upload'
 export type ErrorType =
   | PDFExtractionError['type']
   | FileValidationError['type']
-  | 'NETWORK_ERROR'
 
 interface ErrorDisplayProps {
   error: string
@@ -108,6 +107,37 @@ const ErrorDisplay: FC<ErrorDisplayProps> = ({
             <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
           </svg>
         )
+      case 'TIMEOUT_ERROR':
+        return (
+          <svg
+            className={styles.icon}
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+        )
+      case 'SCANNED_PDF':
+        return (
+          <svg
+            className={styles.icon}
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <polyline points="21 15 16 10 5 21" />
+          </svg>
+        )
       default:
         return (
           <svg
@@ -142,6 +172,10 @@ const ErrorDisplay: FC<ErrorDisplayProps> = ({
         return 'File Too Large'
       case 'NETWORK_ERROR':
         return 'Network Error'
+      case 'TIMEOUT_ERROR':
+        return 'Processing Timeout'
+      case 'SCANNED_PDF':
+        return 'Scanned PDF Detected'
       case 'UNKNOWN_ERROR':
         return 'Unknown Error'
       default:
@@ -157,13 +191,17 @@ const ErrorDisplay: FC<ErrorDisplayProps> = ({
       case 'PASSWORD_PROTECTED':
         return 'This PDF is password protected. Please remove the password protection and try again.'
       case 'EXTRACTION_FAILED':
-        return 'Unable to extract text from this PDF. The file may be scanned images without text layers.'
+        return 'Unable to extract text from this PDF. The file may be scanned images without text layers, or too large for browser processing.'
       case 'INVALID_TYPE':
         return 'Please upload a valid PDF file.'
       case 'FILE_TOO_LARGE':
         return 'Please select a smaller file and try again.'
       case 'NETWORK_ERROR':
-        return 'Please check your internet connection and try again.'
+        return 'Please check your internet connection and try again. The PDF processing libraries could not be loaded.'
+      case 'TIMEOUT_ERROR':
+        return 'The PDF took too long to process. Try a smaller file with fewer pages or simpler content.'
+      case 'SCANNED_PDF':
+        return 'This PDF appears to contain scanned images. Text extraction may be incomplete. Consider using a PDF with selectable text or applying OCR first.'
       default:
         return 'Please try again or contact support if the problem persists.'
     }
